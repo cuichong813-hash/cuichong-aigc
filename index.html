@@ -451,6 +451,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
   .playlist-item { font-size: 0.75rem; padding: 6px 10px; }
 }
 @media (max-width: 600px) {
+  /* 移动端视频可能不自动播放，加渐变背景兜底 */
+  .hero { background: linear-gradient(180deg, #0d0d28 0%, #050510 100%); }
   .works-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .nav-links.open {
@@ -493,7 +495,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
      ============================================================ -->
 <section class="hero" id="hero">
   <!-- 晴天 — 背景自动静音播放 -->
-  <video class="hero-video-bg" src="晴天.mp4" autoplay muted loop playsinline></video>
+  <video class="hero-video-bg" id="heroVideo" src="晴天.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
   <div class="hero-video-overlay"></div>
   <div class="hero-content">
     <img class="hero-avatar" src="头像.jpg" alt="崔冲的头像">
@@ -802,6 +804,22 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
       }
     });
   });
+
+  /* ---- HERO 视频移动端强制播放 ---- */
+  (function() {
+    var hv = document.getElementById('heroVideo');
+    if (!hv) return;
+    // 页面加载后尝试播放
+    hv.play().catch(function() {});
+    // 用户首次触摸/点击页面时再次尝试（移动端常需用户交互）
+    document.addEventListener('touchstart', function() { hv.play().catch(function() {}); }, { once: true });
+    document.addEventListener('click', function() { hv.play().catch(function() {}); }, { once: true });
+    // 微信/部分浏览器在 WeixinJSBridgeReady 后才能播
+    if (typeof WeixinJSBridge !== 'undefined') {
+      WeixinJSBridge.invoke('getNetworkType', {}, function() { hv.play().catch(function() {}); });
+    }
+    document.addEventListener('WeixinJSBridgeReady', function() { hv.play().catch(function() {}); }, false);
+  })();
 
   /* ---- PLAYER FUNCTIONS ---- */
   function loadVideo(index) {
