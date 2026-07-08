@@ -122,19 +122,26 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
    HERO
    ============================================================ */
 .hero {
-  min-height: auto; display: flex; align-items: center; justify-content: center;
-  padding: 110px 24px 24px;
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 100px 24px 60px;
   position: relative;
   overflow: hidden;
 }
 /* Hero 视频背景 */
 .hero-video-bg {
-  position: absolute; inset: 0; z-index: 0;
+  position: absolute; top: 0; left: 0; z-index: 0;
   width: 100%; height: 100%; object-fit: cover;
+  pointer-events: none;
 }
 .hero-video-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(5,5,16,0.55) 0%, rgba(5,5,16,0.75) 60%, rgba(5,5,16,0.95) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(5,5,16,0.3) 0%,
+    rgba(5,5,16,0.65) 40%,
+    rgba(5,5,16,0.85) 75%,
+    rgba(5,5,16,0.95) 100%
+  );
 }
 .hero-content { text-align: center; max-width: 700px; position: relative; z-index: 2; }
 .hero-avatar {
@@ -229,69 +236,6 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
   position: relative; width: 100%;
   background: #000; cursor: pointer;
 }
-.player-video-wrap video {
-  display: block; width: 100%; max-height: 70vh;
-  object-fit: contain;
-}
-.player-video-wrap .play-center {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.3); opacity: 1; transition: opacity 0.3s;
-  pointer-events: none;
-}
-.player-video-wrap.playing .play-center { opacity: 0; }
-.play-center-icon {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(8px);
-  border: 2px solid rgba(255,255,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-}
-.play-center-icon::after {
-  content: ''; display: block; width: 0; height: 0;
-  border-style: solid;
-  border-width: 12px 0 12px 20px;
-  border-color: transparent transparent transparent #fff;
-  margin-left: 4px;
-}
-/* Custom controls */
-.player-controls {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px;
-  background: #0d0d22;
-  border-top: 1px solid #1a1a38;
-}
-.player-btn {
-  background: none; border: none; color: var(--text-secondary);
-  cursor: pointer; font-size: 1.1rem; padding: 4px 8px;
-  transition: var(--transition); border-radius: 6px;
-  display: flex; align-items: center; gap: 4px;
-  font-family: var(--font-mono);
-}
-.player-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
-.player-btn.active { color: var(--accent-cyan); }
-.player-progress {
-  flex: 1; height: 4px; -webkit-appearance: none; appearance: none;
-  background: #1a1a38; border-radius: 2px; cursor: pointer; outline: none;
-}
-.player-progress::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 13px; height: 13px;
-  border-radius: 50%; background: var(--accent-cyan);
-  cursor: pointer; box-shadow: 0 0 8px rgba(0,229,255,0.4);
-}
-.player-time {
-  font-family: var(--font-mono); font-size: 0.78rem;
-  color: var(--text-secondary); white-space: nowrap;
-  min-width: 80px; text-align: right;
-}
-.player-volume { display: flex; align-items: center; gap: 6px; }
-.player-volume-slider {
-  width: 70px; height: 3px; -webkit-appearance: none; appearance: none;
-  background: #1a1a38; border-radius: 2px; cursor: pointer; outline: none;
-}
-.player-volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 11px; height: 11px;
-  border-radius: 50%; background: #fff; cursor: pointer;
-}
 /* Playlist strip */
 .player-playlist-label {
   font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary);
@@ -372,38 +316,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
   background: #000;
   overflow: hidden;
 }
-.work-video-wrap video {
-  width: 100%; height: 100%; object-fit: cover;
-  display: block;
-}
-.work-video-wrap .play-overlay {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.4);
-  opacity: 1; transition: opacity 0.3s;
-  cursor: pointer;
-}
-.work-video-wrap .play-overlay:hover { opacity: 0; }
-.work-video-wrap .play-icon {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(8px);
-  display: flex; align-items: center; justify-content: center;
-  border: 2px solid rgba(255,255,255,0.2);
-  transition: var(--transition);
-}
-.work-video-wrap .play-icon::after {
-  content: ''; display: block; width: 0; height: 0;
-  border-style: solid;
-  border-width: 10px 0 10px 18px;
-  border-color: transparent transparent transparent #fff;
-  margin-left: 4px;
-}
-.work-video-wrap:hover .play-icon {
-  background: rgba(255,255,255,0.25);
-  transform: scale(1.1);
-}
-.work-info { padding: 20px; }
+.work-info { padding: 20px; } padding: 20px; }
 .work-category {
   display: inline-block; padding: 2px 10px; border-radius: 12px;
   font-size: 0.7rem; font-family: var(--font-mono);
@@ -535,9 +448,6 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
   .works-grid { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
-  .player-controls { gap: 6px; padding: 10px 10px; }
-  .player-volume { display: none; }
-  .player-time { min-width: 68px; font-size: 0.7rem; }
   .player-playlist { gap: 6px; padding: 6px 10px 10px; }
   .playlist-item { font-size: 0.75rem; padding: 6px 10px; }
 }
@@ -583,8 +493,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
      HERO
      ============================================================ -->
 <section class="hero" id="hero">
-  <!-- 主打视频背景 — 打开即自动播放 -->
-  <video class="hero-video-bg" src="比赛作品/《芽》.mp4" autoplay muted loop playsinline></video>
+  <!-- 晴天 — 背景自动静音播放 -->
+  <video class="hero-video-bg" src="晴天.mp4" autoplay muted loop playsinline></video>
   <div class="hero-video-overlay"></div>
   <div class="hero-content">
     <div class="hero-avatar" aria-label="崔冲的头像"><span>冲</span></div>
@@ -626,21 +536,14 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
       </div>
       <span class="player-title" id="playerTitle">《芽》 — 比赛作品</span>
     </div>
-    <!-- Video -->
-    <div class="player-video-wrap" id="playerVideoWrap">
-      <video id="mainPlayer" src="比赛作品/《芽》.mp4" preload="auto" muted loop playsinline></video>
-      <div class="play-center"><div class="play-center-icon"></div></div>
-    </div>
-    <!-- Controls -->
-    <div class="player-controls">
-      <button class="player-btn" id="btnPrev" title="上一个">⏮</button>
-      <button class="player-btn" id="btnPlay" title="播放">▶</button>
-      <button class="player-btn" id="btnNext" title="下一个">⏭</button>
-      <input type="range" class="player-progress" id="progressBar" value="0" min="0" max="100" step="0.1">
-      <span class="player-time" id="timeDisplay">00:00 / 00:00</span>
-      <button class="player-btn" id="btnMute" title="音量">🔊</button>
-      <input type="range" class="player-volume-slider" id="volumeSlider" value="80" min="0" max="100">
-      <button class="player-btn" id="btnLoop" title="循环播放">🔁</button>
+    <!-- B站 嵌入播放器 -->
+    <div class="player-video-wrap">
+      <iframe id="mainPlayer"
+        src="https://player.bilibili.com/player.html?bvid=BV1XVM36rE2R&page=1&high_quality=1&autoplay=0"
+        scrolling="no" border="0" frameborder="no" framespacing="0"
+        allowfullscreen="true"
+        style="width:100%;aspect-ratio:16/9;">
+      </iframe>
     </div>
     <!-- Playlist -->
     <div class="player-playlist-label">▸ 播放列表</div>
@@ -760,23 +663,13 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
 <script>
 (function() {
   /* ============================================================
-     PLAYER LOGIC
+     PLAYER LOGIC (B站 iframe 切换)
      ============================================================ */
   const player = document.getElementById('mainPlayer');
-  const playerVideoWrap = document.getElementById('playerVideoWrap');
   const playerTitle = document.getElementById('playerTitle');
-  const btnPlay = document.getElementById('btnPlay');
-  const btnPrev = document.getElementById('btnPrev');
-  const btnNext = document.getElementById('btnNext');
-  const btnMute = document.getElementById('btnMute');
-  const btnLoop = document.getElementById('btnLoop');
-  const progressBar = document.getElementById('progressBar');
-  const volumeSlider = document.getElementById('volumeSlider');
-  const timeDisplay = document.getElementById('timeDisplay');
   const playlist = document.getElementById('playlist');
 
   let currentIndex = 0;
-  let isLooping = true;
 
   /* ---- WORK DATA ---- */
   const works = [
@@ -784,7 +677,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
       category: '比赛作品',
       title: '《芽》',
       desc: '以"生长"为主题的实验性 AI 短片。提名 OMNI 国际人工智能电影节、Poor Cinema 国际"低成本电影"节，入围 2026 UPWard 国际学生电影节。',
-      src: '比赛作品/《芽》.mp4',
+      bvid: 'BV1XVM36rE2R',
       tags: ['Kling', 'Runway', 'Midjourney'],
       awards: ['🏆 OMNI 提名', '🏆 Poor Cinema 提名', '🎬 UPWard 入围'],
     },
@@ -792,7 +685,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
       category: '比赛作品',
       title: '《乌鸦》',
       desc: '暗黑风格的 AI 生成短片，通过乌鸦的意象探讨孤独与自由。荣获百度 AI 黑客松杭州站全国三等奖。',
-      src: '比赛作品/《乌鸦》.mp4',
+      bvid: 'BV19VM36rE7w',
       tags: ['Runway', 'Pika', 'Midjourney'],
       awards: ['🥉 百度 AI 黑客松 全国三等奖'],
     },
@@ -800,31 +693,35 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
       category: '个人作品',
       title: 'GTA 恶搞',
       desc: '以 GTA 游戏风格为灵感的 AI 创意恶搞短片，融合赛博美学与黑色幽默。全流程 AI 生成，探索 AIGC 在创意娱乐内容中的可能性。',
-      src: '个人作品/GTA恶搞.mp4',
+      bvid: 'BV1ZoEB6pEoM',
       tags: ['Runway', 'Pika', 'Midjourney'],
     },
     {
       category: '个人作品',
       title: '晴天',
       desc: '以经典华语歌曲为情感内核的 AI 生成叙事短片。通过 AI 影像语言探索音乐与视觉叙事的跨界融合，打造治愈系视听体验。',
-      src: '个人作品/晴天.mp4',
+      bvid: 'BV1XVM36rEDP',
       tags: ['Kling', 'Midjourney', 'Seedance'],
     },
     {
       category: '成竹实习',
       title: '爸爸替儿子展示手工小包',
       desc: '实习期间为品牌方打造的电商产品展示 AI 短片。以亲子温情叙事为切入点，全流程 AI 生成，突出手工皮具质感与匠心。',
-      src: '成竹实习期间部分作品/AAA爸爸替儿子展示手工小包.mp4',
+      bvid: 'BV1VVM36kEZ1',
       tags: ['Kling', 'Seedance', 'Midjourney'],
     },
     {
       category: '成竹实习',
       title: '品牌视觉短片',
       desc: '实习期间完成的商业品牌视觉短片，应用于品牌传播与社交媒体营销场景。全流程 AI 生成 + 后期精剪。',
-      src: '成竹实习期间部分作品/20260708-132752.mp4',
+      bvid: 'BV1XVM36rEUp',
       tags: ['Runway', 'Kling', '剪映'],
     },
   ];
+
+  function getBiliUrl(bvid) {
+    return 'https://player.bilibili.com/player.html?bvid=' + bvid + '&page=1&high_quality=1&autoplay=0';
+  }
 
   /* ---- RENDER WORK CARDS ---- */
   const grid = document.getElementById('worksGrid');
@@ -834,10 +731,12 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
     card.style.transitionDelay = (i * 0.1) + 's';
     card.innerHTML = `
       <div class="work-video-wrap">
-        <video src="${w.src}" preload="metadata" muted loop playsinline></video>
-        <div class="play-overlay" title="悬停预览">
-          <div class="play-icon"></div>
-        </div>
+        <iframe
+          src="${getBiliUrl(w.bvid)}"
+          scrolling="no" border="0" frameborder="no" framespacing="0"
+          allowfullscreen="true"
+          style="width:100%;aspect-ratio:16/9;display:block;">
+        </iframe>
       </div>
       <div class="work-info">
         <span class="work-category">${w.category}</span>
@@ -862,17 +761,6 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
       </div>
     `;
     grid.appendChild(card);
-
-    /* Hover-to-play */
-    const video = card.querySelector('video');
-    const overlay = card.querySelector('.play-overlay');
-    card.addEventListener('mouseenter', () => { video.play().catch(()=>{}); });
-    card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
-    overlay.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (video.paused) { video.play().catch(()=>{}); overlay.style.opacity = '0'; }
-      else { video.pause(); overlay.style.opacity = '1'; }
-    });
   });
 
   /* ---- SCROLL REVEAL ---- */
@@ -917,124 +805,31 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
   });
 
   /* ---- PLAYER FUNCTIONS ---- */
-  function formatTime(s) {
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60);
-    return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
-  }
-
   function loadVideo(index) {
     currentIndex = ((index % works.length) + works.length) % works.length;
-    const w = works[currentIndex];
-    player.src = w.src;
-    player.load();
+    var w = works[currentIndex];
+    player.src = getBiliUrl(w.bvid);
     playerTitle.textContent = w.title + ' — ' + w.category;
     updatePlaylistActive();
-    if (playerVideoWrap.classList.contains('playing')) {
-      player.play().catch(() => {});
-    }
   }
 
   function updatePlaylistActive() {
-    document.querySelectorAll('.playlist-item').forEach((el, i) => {
+    document.querySelectorAll('.playlist-item').forEach(function(el, i) {
       el.classList.toggle('active', i === currentIndex);
     });
   }
 
   /* Build playlist */
-  works.forEach((w, i) => {
-    const item = document.createElement('button');
+  works.forEach(function(w, i) {
+    var item = document.createElement('button');
     item.className = 'playlist-item';
     item.textContent = (i + 1) + '. ' + w.title;
-    item.addEventListener('click', () => {
+    item.addEventListener('click', function() {
       loadVideo(i);
-      playerVideoWrap.classList.add('playing');
-      player.play().catch(() => {});
-      btnPlay.textContent = '⏸';
     });
     playlist.appendChild(item);
   });
   updatePlaylistActive();
-
-  /* Play / pause */
-  playerVideoWrap.addEventListener('click', (e) => {
-    if (e.target.tagName === 'VIDEO' || e.target === playerVideoWrap || e.target.closest('.play-center')) {
-      if (player.paused) {
-        player.play().catch(() => {});
-        playerVideoWrap.classList.add('playing');
-        btnPlay.textContent = '⏸';
-      } else {
-        player.pause();
-        playerVideoWrap.classList.remove('playing');
-        btnPlay.textContent = '▶';
-      }
-    }
-  });
-  btnPlay.addEventListener('click', () => {
-    if (player.paused) {
-      player.play().catch(() => {});
-      playerVideoWrap.classList.add('playing');
-      btnPlay.textContent = '⏸';
-    } else {
-      player.pause();
-      playerVideoWrap.classList.remove('playing');
-      btnPlay.textContent = '▶';
-    }
-  });
-
-  /* Progress */
-  player.addEventListener('timeupdate', () => {
-    if (player.duration) {
-      progressBar.value = (player.currentTime / player.duration) * 100;
-      timeDisplay.textContent = formatTime(player.currentTime) + ' / ' + formatTime(player.duration);
-    }
-  });
-  player.addEventListener('loadedmetadata', () => {
-    timeDisplay.textContent = '00:00 / ' + formatTime(player.duration);
-  });
-  progressBar.addEventListener('input', () => {
-    player.currentTime = (progressBar.value / 100) * player.duration;
-  });
-
-  /* Volume */
-  volumeSlider.addEventListener('input', () => {
-    player.volume = volumeSlider.value / 100;
-    player.muted = false;
-    btnMute.textContent = player.volume === 0 ? '🔇' : player.volume < 0.5 ? '🔉' : '🔊';
-  });
-  btnMute.addEventListener('click', () => {
-    player.muted = !player.muted;
-    btnMute.textContent = player.muted ? '🔇' : (player.volume < 0.5 ? '🔉' : '🔊');
-  });
-
-  /* Loop */
-  btnLoop.addEventListener('click', () => {
-    isLooping = !isLooping;
-    player.loop = isLooping;
-    btnLoop.classList.toggle('active', isLooping);
-  });
-  btnLoop.classList.add('active');
-  player.loop = true;
-
-  /* Prev / Next */
-  btnPrev.addEventListener('click', () => { loadVideo(currentIndex - 1); });
-  btnNext.addEventListener('click', () => { loadVideo(currentIndex + 1); });
-  player.addEventListener('ended', () => {
-    if (!isLooping) { loadVideo(currentIndex + 1); }
-  });
-
-  /* Keyboard shortcuts */
-  document.addEventListener('keydown', (e) => {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    switch (e.key) {
-      case ' ': e.preventDefault(); btnPlay.click(); break;
-      case 'ArrowLeft': player.currentTime -= 5; break;
-      case 'ArrowRight': player.currentTime += 5; break;
-      case 'ArrowUp': player.volume = Math.min(1, player.volume + 0.1); volumeSlider.value = player.volume * 100; break;
-      case 'ArrowDown': player.volume = Math.max(0, player.volume - 0.1); volumeSlider.value = player.volume * 100; break;
-      case 'm': btnMute.click(); break;
-    }
-  });
 
 })();
 </script>
